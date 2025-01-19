@@ -1,6 +1,7 @@
 # avoid circular dependency but provide type hints
 from __future__ import annotations
-from typing import TYPE_CHECKING, Union, List, Tuple
+
+from typing import TYPE_CHECKING, List, Tuple, Union
 
 from media_toolkit import ImageFile
 
@@ -15,11 +16,11 @@ from io import BytesIO
 import numpy as np
 from insightface.app.common import Face
 
-from face2face.core.modules.storage.f2f_loader import load_reference_face_from_file
+from face2face.core.modules.storage.f2f_loader import \
+    load_reference_face_from_file
 from face2face.core.modules.storage.file_writable_face import FileWriteableFace
+from face2face.core.modules.utils.utils import encode_path_safe, load_image
 from face2face.settings import EMBEDDINGS_DIR
-from face2face.core.modules.utils.utils import encode_path_safe
-from face2face.core.modules.utils.utils import load_image
 
 
 class _FaceEmbedding:
@@ -99,8 +100,10 @@ class _FaceEmbedding:
             if not detected_faces:
                 raise ValueError(f"No faces detected in the provided image for {face_name}.")
 
-            if len(detected_faces) > 1:
-                raise ValueError(f"Multiple faces detected in the provided image for {face_name}.")
+            # if len(detected_faces) > 1:
+            #     raise ValueError(f"Multiple faces detected in the provided image for {face_name}.")
+
+            print(f"detected_faces: {detected_faces}")
 
             face_name = encode_path_safe(face_name)
             face = detected_faces[0]
