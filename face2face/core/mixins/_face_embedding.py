@@ -100,10 +100,10 @@ class _FaceEmbedding:
             if not detected_faces:
                 raise ValueError(f"No faces detected in the provided image for {face_name}.")
 
-            # if len(detected_faces) > 1:
-            #     raise ValueError(f"Multiple faces detected in the provided image for {face_name}.")
+            if len(detected_faces) > 1:
+                raise ValueError(f"Multiple faces detected in the provided image for {face_name}.")
 
-            print(f"detected_faces: {detected_faces}")
+            # print(f"detected_faces: {detected_faces}")
 
             face_name = encode_path_safe(face_name)
             face = detected_faces[0]
